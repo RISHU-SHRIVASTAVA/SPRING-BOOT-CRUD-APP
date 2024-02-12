@@ -9,4 +9,5 @@ public interface StudentService {
     StudentDTO getStudent(long id);
     List<StudentDTO> getStudents();
     StudentDTO saveStudents(StudentDTO studentDTO);
+    StudentDTO deleteStudent(long id);
 }

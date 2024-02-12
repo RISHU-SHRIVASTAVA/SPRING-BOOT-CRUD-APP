@@ -47,4 +47,39 @@ public class StudentServiceImpl implements StudentService {
         }
         return respStudents;
     }
+
+    @Override
+    public StudentDTO saveStudents(StudentDTO studentDTO) {
+//        to save student we need to convert DTO to entity class i.e. StudentDTO to Student Class.
+        Student student=new Student();
+        student.setName(studentDTO.getName());
+        student.setEmail(studentDTO.getEmail());
+        Student dbStudent= studentDAO.save(student); //this will save the student class
+        // to generate studentDTO we need to convert Entity to DTO class i.e. Student class to StudentDTO class
+
+        StudentDTO respStudentDTO=new StudentDTO();
+        respStudentDTO.setId(dbStudent.getId());
+        respStudentDTO.setName(dbStudent.getName());
+        respStudentDTO.setEmail(dbStudent.getEmail());
+
+        return respStudentDTO;
+    }
+
+    @Override
+    public StudentDTO deleteStudent(long id) {
+        //Fetching id of student
+        Optional<Student> optionalStudent = studentDAO.findById(id);
+        StudentDTO studentDTO=null;
+        if(optionalStudent.isEmpty()){
+            return studentDTO;
+        }
+        studentDAO.deleteById(id);
+
+        studentDTO=new StudentDTO();
+        studentDTO.setId(optionalStudent.get().getId());
+        studentDTO.setName(optionalStudent.get().getName());
+        studentDTO.setEmail(optionalStudent.get().getEmail());
+
+        return studentDTO;
+    }
 }
