@@ -28,7 +28,6 @@ public class Student {
                 ", email='" + email + '\'' +
                 '}';
     }
-
     public String getName() {
         return name;
     }
