@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class StudentController {
@@ -32,6 +29,14 @@ public class StudentController {
             apiResponse.setPath(null);
             apiResponse.setData(studentDTO);
             apiResponse.setApiTimeStamp(new Date());
+        }
+        else{
+            apiResponse.setStatus("Success");
+            apiResponse.setData(null);
+            apiResponse.setApiTimeStamp(new Date());
+            Map<String,String> errorMap=new HashMap<>();
+            errorMap.put("errorMsg","Student with id : "+id+" is wrong or invalid");
+            apiResponse.setError(errorMap);
         }
        return apiResponse;
    }
