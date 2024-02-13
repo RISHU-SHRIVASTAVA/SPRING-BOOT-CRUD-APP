@@ -35,4 +35,9 @@ public class StudentController {
     public StudentDTO deleteStudent(@PathVariable long id){
         return studentService.deleteStudent(id);
     }
+
+    @PutMapping("/students")
+    public StudentDTO updateStudent(@RequestBody StudentDTO studentDTO){
+        return studentService.updateStudent(studentDTO);
+    }
 }
